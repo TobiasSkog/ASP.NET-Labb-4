@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Borrow Book";
+}
+
+<h4>Borrow a book</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BorrowBook">
+            <div class="form-group">
+                <label class="control-label">Customer:</label>
+                <select class="form-control" name="customerId" asp-items="ViewBag.CustomerId"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Book:</label>
+                <select class="form-control" name="bookId" asp-items="ViewBag.BookId"></select>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Borrow Book" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Index">Back</a>
+</div>

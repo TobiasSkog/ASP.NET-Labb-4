@@ -1,0 +1,61 @@
+﻿@model IEnumerable<net23_asp_net_labb4_mvc.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+
+
+<h1>All Customers:</h1>
+
+<p>
+    <a asp-action="Create">Create a new Customer</a>
+</p>
+
+@if (Model.Count() == 0)
+{
+    <p>No customers found in the database!</p>    
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BorrowedBooks)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var customer in Model) 
+        {
+            string amountOfBorrowedBooks = customer.BorrowedBooks.Count > 0 ? customer.BorrowedBooks.Count.ToString() : "None";
+            <tr>
+                <td>                
+                    @Html.DisplayFor(modelItem => customer.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => customer.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => amountOfBorrowedBooks)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@customer.Id">Details</a> |                
+                    <a asp-action="Edit" asp-route-id="@customer.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@customer.Id">Delete</a> |
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+

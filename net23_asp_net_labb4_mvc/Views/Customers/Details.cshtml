@@ -1,0 +1,59 @@
+﻿@model net23_asp_net_labb4_mvc.Models.Customer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <hr />
+
+        <h4>Borrowed Books</h4>
+
+        @if(Model.BorrowedBooks.Count > 0)
+        {
+            <hr />
+            foreach(var bookJoinTable in Model.BorrowedBooks)
+            {
+                
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(bookModel => bookJoinTable.Book.Title)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(bookModel => bookJoinTable.Book.Title)
+                </dd>
+                
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(bookModel => bookJoinTable.BorrowedDate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(bookModel => bookJoinTable.BorrowedDate)
+                </dd>
+                <dd class="col-sm-2">
+                    <a asp-action="ReturnBook" asp-route-customerId="@Model.Id" asp-route-bookId="@bookJoinTable.Book.Id" class="btn btn-info">Return Book</a>
+                </dd>
+                <hr />
+            }
+        }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
